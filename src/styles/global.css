@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: var(--primary-font);
+    min-height: 100dvh;
+    background: var(--light-gradient);
+    color: var(--neutral-900);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body h1 {
+    font-size: clamp(1.5rem, 7vw, 2.5rem);
+    font-weight: 700;
+    color: var(--neutral-900);
+}
+
+body p {
+    color: var(--neutral-600);
+}
+
+body label {
+    color: var(--neutral-900);
+}
+
+body p,
+body label {
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    line-height: 1.6;
+}
+
+body a {
+    color: var(--blue-700);
+    font-weight: 600;
+    text-decoration: none;
+}

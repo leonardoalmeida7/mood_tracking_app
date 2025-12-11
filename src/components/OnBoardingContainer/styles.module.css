@@ -1,0 +1,38 @@
+.container {
+  background-color: var(--neutral-0);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 600px;
+}
+
+.profileImage {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.fileLabel {
+  color: var(--neutral-900);
+  line-height: 1.2;
+  padding: .5rem 1rem;
+  font-weight: 500;
+  border-radius: .65rem;
+  border: 1px solid var(--neutral-300);
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 1rem;
+}
+
+input[type="file"] {
+  opacity: 0; 
+}
+
+.smallText {
+  font-size: 0.875rem;
+  color: var(--neutral-600);
+  font-weight: 500;
+}

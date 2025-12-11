@@ -1,0 +1,20 @@
+.formGroup {
+  margin: 1rem 0;
+}
+
+.formGroup input {
+  padding: 0.85rem;
+  font-size: 1.1rem;
+  border: 1px solid var(--neutral-300);
+  border-radius: 0.65rem;
+}
+
+.errorMessage {
+  color: var(--red-700);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.hasError input {
+  border: 2px solid var(--red-700);
+}

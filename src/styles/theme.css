@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Reddit Sans';
+    src: url('../assets/static/RedditSans-Regular.ttf') format('truetype');
+}
+
+:root {
+    /* Neutral color palette */
+    --neutral-900: #21214D;
+    --neutral-600: #57577B;
+    --neutral-300: #9393B7;
+    --neutral-200: #CBCDD0;
+    --neutral-0: #FFFFFF;
+
+    /* Blue color palette */
+    --blue-700: #2A4CD5;
+    --blue-600: #4865db;
+    --blue-300: #89CAFF;
+    --blue-200: #C7D3F7;
+    --blue-100: #E0E6FA;
+
+    /* Other colors */
+    --indigo-200: #B8B1FF;
+    --green-300: #89E780;
+    --amber-300: #FFC97C;
+    --red-700: #E60013;
+    --light-gradient: linear-gradient(180deg, #F5F5FF 72.99%, #E0E0FF 100%);
+
+    --primary-font: 'Reddit Sans', sans-serif;
+}
