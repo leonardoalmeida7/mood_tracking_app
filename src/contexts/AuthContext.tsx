@@ -13,7 +13,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'));
 
     useEffect(() => { 
         const token = localStorage.getItem('token')
@@ -29,7 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         localStorage.removeItem('token');
         setIsAuthenticated(false);
     }
-
+    console.log("ProtectedRoute - isAuthenticated:", isAuthenticated);
     return (
         <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
             {children}

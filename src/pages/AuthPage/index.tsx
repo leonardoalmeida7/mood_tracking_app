@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 export const AuthPage = () => {
   type AuthMode = 'login' | 'register';
-  const path: AuthMode = window.location.pathname.split('/')[2] as AuthMode;
+  const path: AuthMode = window.location.pathname.split('/')[3] as AuthMode;
     
   return (
     <div className={`${styles.container} d-flex flex-column justify-content-center gap-4`}>

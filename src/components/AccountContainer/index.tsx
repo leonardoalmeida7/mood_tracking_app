@@ -16,7 +16,6 @@ export const AccountContainer = ({ route }: AccountContainerProps) => {
   const { email, setEmail, password, setPassword } = useRegister();
 
 
-
   return (
     <main className={`${styles.container}`}>
       <div>

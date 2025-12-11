@@ -2,13 +2,12 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
-export const ProtectedRoute = () => {
+export const PublicRoute = () => {
   const { isAuthenticated } = useContext(AuthContext);
 
-  if (!isAuthenticated) {
-    return <Navigate to="/auth/login" replace />;
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
   }
 
-  return <Outlet />; // renderiza as rotas filhas
+  return <Outlet />; 
 };
-

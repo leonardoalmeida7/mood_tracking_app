@@ -1,0 +1,22 @@
+.container {
+}
+
+.greeting {
+  color: var(--blue-600);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.container h1 {
+  font-size: 2.5rem;
+  margin: 0.5rem 0;
+}
+
+.date {
+    color: var(--neutral-600);
+    font-weight: 500;
+}
+
+.container button {
+    width: 80%;
+}
