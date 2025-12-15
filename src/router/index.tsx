@@ -2,7 +2,7 @@ import { createBrowserRouter, type RouteObject } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 import { AuthPage } from "../pages/AuthPage";
-import { HomePage } from "../pages/HomePage";
+
 import App from "../App";
 import { OnBoardingPage } from "../pages/OnBoardingPage";
 

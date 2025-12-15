@@ -1,6 +1,8 @@
 import { AverageContainer } from "../../components/AverageContainer";
 import { Header } from "../../components/Header"
 import { InitialPresentation } from "../../components/InitialPresentation";
+import { TrendsContainer } from "../../components/TrendsContainer";
+
 
 export const HomePage = () => {
   return (
@@ -9,9 +11,7 @@ export const HomePage = () => {
       <main className="my-4">
         <InitialPresentation />
         <AverageContainer />
-        <div>
-            <h3>Mood and sleep trends</h3>
-        </div>
+        <TrendsContainer />
       </main>
     </main>
   );

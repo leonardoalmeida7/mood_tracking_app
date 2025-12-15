@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 
 export const AverageContainer = () => {
   return (
-    <div className={`${styles.container} my-4`}>
+    <div className={`${styles.container} my-4 d-flex flex-column gap-3`}>
       <div>
         <p className={styles.title}>
           Average Mood <span>(Last 5 Check-ins)</span>
