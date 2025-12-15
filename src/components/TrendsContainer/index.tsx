@@ -3,9 +3,9 @@ import iconSleep from "../../assets/images/icon-sleep.svg";
 import styles from "./styles.module.css";
 
 // Exemplo de dados
-const quantities = [10, 8, 6, 4, 2, 0];
+/* const quantities = [10, 8, 6, 4, 2, 0];
 const days = Array.from({ length: 7 }, (_, i) => i + 1); // Dias 1 a 7
-const data = [2, 4, 6, 8, 10, 6, 4]; // Quantidade por dia
+const data = [2, 4, 6, 8, 10, 6, 4]; // Quantidade por dia */
 
 export const TrendsContainer = () => {
   return (
