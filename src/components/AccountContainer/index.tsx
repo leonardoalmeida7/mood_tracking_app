@@ -2,7 +2,7 @@ import { FormGroup } from "../FormGroup";
 import { DefaultButton } from "../../ui/DefaultButton";
 import { authText } from "../../assets/data/authText";
 import { Link } from "react-router-dom";
-import { useFormSubmit } from "../../utils/FormSubmit";
+import { useFormSubmit } from "../../Hooks/useFormSubmit";
 import { useRegister } from "../../contexts/RegisterContext";
 
 import styles from "./styles.module.css";

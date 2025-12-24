@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HomePage } from './pages/HomePage';
 
 import './styles/global.css';
@@ -7,7 +8,9 @@ function App() {
 
   return (
     <>
-      <HomePage />
+      <QueryClientProvider client={new QueryClient()}>
+        <HomePage />
+      </QueryClientProvider>
     </>
   );
 }

@@ -2,7 +2,11 @@ import bgAverages from "../../assets/images/bg-pattern-averages.svg";
 
 import styles from "./styles.module.css";
 
-export const AverageContainer = () => {
+type AverageContainerProps = {
+  latestMood: any;
+};
+
+export const AverageContainer = ({ latestMood }: AverageContainerProps) => {
   return (
     <div className={`${styles.container} my-4 d-flex flex-column gap-3`}>
       <div>

@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { router } from "./router";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import { RegisterProvider } from "./contexts/RegisterContext.tsx";
+import { LogMoodProvider } from "./contexts/LogMoodContext.tsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,8 +14,10 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
       <RegisterProvider>
-        <RouterProvider router={router} />
-        <ToastContainer />
+        <LogMoodProvider>
+          <RouterProvider router={router} />
+          <ToastContainer />
+        </LogMoodProvider>
       </RegisterProvider>
     </AuthProvider>
   </StrictMode>

@@ -1,0 +1,38 @@
+.content {
+    background-color: var(--neutral-0);
+    border-radius: 1rem;
+    border: 1px solid var(--neutral-200);
+}
+
+.feeling {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--neutral-600);
+}
+
+.quoteIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.sleepLabel {
+    font-weight: 500;
+    color: var(--neutral-600);
+}
+
+.sleepHours {
+    font-weight: bold;
+    color: var(--neutral-900);
+    font-size: 1.8rem;
+}
+
+.reflectionNotes {
+    color: var(--neutral-900);
+}
+
+.feelingsContainer {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: var(--neutral-600);
+}

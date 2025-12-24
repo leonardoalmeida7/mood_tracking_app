@@ -5,7 +5,7 @@ import AvatarPlaceholder from "../../assets/images/avatar-placeholder.svg";
 
 import { DefaultButton } from "../../ui/DefaultButton";
 
-import { useFormSubmit } from "../../utils/FormSubmit";
+import { useFormSubmit } from "../../Hooks/useFormSubmit";
 
 import styles from "./styles.module.css";
 

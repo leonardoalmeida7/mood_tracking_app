@@ -6,17 +6,18 @@ import iconVerySad from "../images/icon-very-sad-color.svg";
 
 
 type MoodInfo = {
+  id: number;
   mood: string;
   icon: string;
   alt: string;
 };
 
 export const moodInfo: MoodInfo[] = [
-    { mood: "Very Happy", icon: iconVeryHappy, alt: "Very Happy Icon" },
-    { mood: "Happy", icon: iconHappy, alt: "Happy Icon" },
-    { mood: "Neutral", icon: iconNeutral, alt: "Neutral Icon" },
-    { mood: "Sad", icon: iconSad, alt: "Sad Icon" },
-    { mood: "Very Sad", icon: iconVerySad, alt: "Very Sad Icon" },
+    { id: 1, mood: "Very Happy", icon: iconVeryHappy, alt: "Very Happy Icon" },
+    { id: 2, mood: "Happy", icon: iconHappy, alt: "Happy Icon" },
+    { id: 3, mood: "Neutral", icon: iconNeutral, alt: "Neutral Icon" },
+    { id: 4, mood: "Sad", icon: iconSad, alt: "Sad Icon" },
+    { id: 5, mood: "Very Sad", icon: iconVerySad, alt: "Very Sad Icon" },
 ]
 
 export const feelsTags: string[] = [
@@ -40,4 +41,12 @@ export const feelsTags: string[] = [
   "Disappointed",
   "Optimistic",
   "Restless",
+]
+
+export const sleepOptions: string[] = [
+  "9+ hours",
+  "7-8 hours",
+  "5-6 hours",
+  "3-4 hours",
+  "0-2 hours",
 ]

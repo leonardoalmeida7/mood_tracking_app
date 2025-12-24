@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useRegister } from "../contexts/RegisterContext";
 import { useNavigate } from "react-router-dom";
-import { api } from "../service/api";
+import { api } from "../services/api";
 import { AuthContext } from "../contexts/AuthContext";
 import { toast } from "react-toastify";
 
@@ -50,7 +50,7 @@ export const useFormSubmit = () => {
         email,
         password,
       });
-      login(response.data.token);
+      login(response.data.token, response.data.user);
       toast.success(response.data.message);
     } catch (error: any) {
       console.error("Error during authentication:", error);
@@ -104,8 +104,7 @@ export const useFormSubmit = () => {
         password,
       });
       toast.success(response.data.message);
-      console.log("Registration successful", response.data);
-      login(response.data.token);
+      login(response.data.token, response.data.user);
     } catch (error: any) {
       console.error("Error during registration:", error);
       toast.error(

@@ -29,5 +29,5 @@ const routes: RouteObject[] = [
 ];
 
 export const router = createBrowserRouter(routes, {
-  basename: "/Mood_Tracking_App/",
+  basename: "/mood_tracking_app/",
 });

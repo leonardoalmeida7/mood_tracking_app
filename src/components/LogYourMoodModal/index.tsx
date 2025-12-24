@@ -1,34 +1,43 @@
-
+import { useLogMood } from "../../contexts/LogMoodContext";
 import { DefaultButton } from "../../ui/DefaultButton";
-/* import { MoodToday } from "../MoodToday";
-import { DidYouFeelContainer } from "../DidYouFeelContainer"; */
+import { useStepMood } from "../../Hooks/useStepMood";
+import { BarsSteps } from "../BarsSteps";
+import { MoodToday } from "../MoodToday";
+import { DidYouFeelContainer } from "../DidYouFeelContainer";
+import { WriteAboutYourDay } from "../WriteAboutYourDay";
+import { HoursLastNight } from "../HoursLastNight";
 
 import styles from "./styles.module.css";
-import { WriteAboutYourDay } from "../WriteAboutYourDay";
 
 type LogYourMoodModalProps = {
   active: boolean;
 };
+export const LogYourMoodModal: React.FC<LogYourMoodModalProps> = ({ active }) => {
+  const { handleNext, step, length } = useStepMood();
+  const { setActiveModal } = useLogMood();  // Close modal function
 
-export const LogYourMoodModal = ({ active }: LogYourMoodModalProps) => {
+  const stepComponents = [
+    <MoodToday key={1} />,
+    <DidYouFeelContainer key={2} />,
+    <WriteAboutYourDay key={3} />,
+    <HoursLastNight key={4} />,
+  ];
+  const StepComponent = stepComponents[step - 1] || null;
+
   return (
     <div
       className={`${styles.container} ${
         active ? styles.active : styles.hidden
       }`}
+      onClick={() => setActiveModal(false)}
     >
-      <div className={styles.content}>
+      <div className={styles.content} onClick={e => e.stopPropagation()}>
         <div className="text-start">
           <h1>Log your mood</h1>
-          <div className={`${styles.bars} d-flex gap-3 my-4 `}>
-            <div className={styles.bar}></div>
-            <div className={styles.bar}></div>
-            <div className={styles.bar}></div>
-            <div className={styles.bar}></div>
-          </div>
+          <BarsSteps step={step} length={length} />
+          {StepComponent}
         </div>
-        <WriteAboutYourDay />
-        <DefaultButton>Continue</DefaultButton>
+        <DefaultButton onClick={handleNext}>{step === length ? "Finish" : "Continue"}</DefaultButton>
       </div>
     </div>
   );
