@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect, use } from "react";;
+import { createContext, useState, useContext, useEffect } from "react";;
 
 type LogMoodContextType = {
   concluided: boolean;
@@ -40,7 +40,7 @@ export const LogMoodProvider: React.FC<{ children: React.ReactNode }> = ({
       setHoursLastNight("");
     }
   }, [activeModal]);
-
+  
   return (
     <LogMoodContext.Provider
       value={{

@@ -13,7 +13,6 @@ export const DataSection = ({ lastData }: DataSectionProps) => {
   const { mood } = lastData.data;
   const moodDetails = moodInfo.find((moodItem) => moodItem.mood === mood);
 
-  console.log();
   return (
     <div className={`${styles.container} d-flex flex-column gap-4 my-4`}>
       <div className={`${styles.content} text-center px-4 py-4`}>

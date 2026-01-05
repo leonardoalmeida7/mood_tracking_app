@@ -53,7 +53,7 @@ export const OnBoardingContainer = () => {
               type="file"
               id="profileImage"
               name="profileImage"
-              accept=".png, .jpeg"
+              accept=".png, .jpeg, .jpg"
               onChange={(e) =>
                 setProfileImage(e.target.files ? e.target.files[0] : null)
               }

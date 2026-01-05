@@ -1,4 +1,8 @@
+import { useFetchQuery } from "../../Hooks/useFetchQuery";
+
 import iconSleep from "../../assets/images/icon-sleep.svg";
+import { useLogMood } from "../../contexts/LogMoodContext";
+import { moodInfo } from "../../assets/data/moodInfo";
 
 import styles from "./styles.module.css";
 
@@ -8,6 +12,37 @@ const days = Array.from({ length: 7 }, (_, i) => i + 1); // Dias 1 a 7
 const data = [2, 4, 6, 8, 10, 6, 4]; // Quantidade por dia */
 
 export const TrendsContainer = () => {
+  const { data, error, isLoading } = useFetchQuery("all", "fetchAll");
+
+  const getMoodValue = (mood: string) => {
+    const moodEntry = moodInfo.find((m) => m.mood === mood);
+    return moodEntry || null;
+  };
+
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      month: "short",
+      day: "numeric",
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options);
+  };
+
+  const convertSleepToNumber = (sleepHours: string) => {
+    switch (sleepHours) {
+      case "9+ hours":
+        return 100;
+      case "7-8 hours":
+        return 60;
+      case "5-6 hours":
+        return 40;
+      case "3-4 hours":
+        return 30;
+      default:
+        return 20;
+    }
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Mood and sleep trends</h2>
@@ -36,46 +71,35 @@ export const TrendsContainer = () => {
         </div>
         <div
           className={`${styles.tableContent} d-flex gap-3`}
-          style={{ 
-            overflowX: "auto", 
+          style={{
+            overflowX: "auto",
             overflowY: "visible",
-            paddingBottom: "10px",
-            scrollBehavior: "smooth"
+            scrollBehavior: "smooth",
           }}
         >
-          <div
-            className="d-flex flex-column flex-shrink-0"
-            style={{ width: "40px", minWidth: "40px" }}
-          >
-            <div className={styles.bar}>fwdw</div>
-            <div>
-              April <span className="fw-semibold">12</span>
+          {data?.data.map(({ id, mood, createdAt, sleepHours }) => (
+            <div
+              className="d-flex flex-column flex-shrink-0"
+              style={{ width: "35px", minWidth: "35px" }}
+              key={id}
+            >
+              <div
+                className={styles.bar}
+                style={{
+                  backgroundColor: `${getMoodValue(mood)?.color}`,
+                  height: `${convertSleepToNumber(sleepHours)}%`,
+                }}
+              >
+                <img
+                  src={getMoodValue(mood)?.icon}
+                  alt={getMoodValue(mood)?.alt}
+                />
+              </div>
+              <div>
+                <span className="fw-semibold">{formatDate(createdAt)}</span>
+              </div>
             </div>
-          </div>
-          <div className="d-flex flex-column flex-shrink-0" style={{ width: "40px", minWidth: "40px" }}>
-            <div className={styles.bar}>fwdw</div>
-            <div className="">April <span className="fw-semibold">13</span></div>
-          </div>
-          <div className="d-flex flex-column flex-shrink-0" style={{ width: "40px", minWidth: "40px" }}>
-            <div className={styles.bar}>fwdw</div>
-            <div>April <span className="fw-semibold">14</span></div>
-          </div>
-          <div className="d-flex flex-column flex-shrink-0" style={{ width: "40px", minWidth: "40px" }}>
-            <div className={styles.bar}>fwdw</div>
-            <div>April <span className="fw-semibold">15</span></div>
-          </div>
-          <div className="d-flex flex-column flex-shrink-0" style={{ width: "40px", minWidth: "40px" }}>
-            <div className={styles.bar}>fwdw</div>
-            <div>April <span className="fw-semibold">16</span></div>
-          </div>
-          <div className="d-flex flex-column flex-shrink-0" style={{ width: "40px", minWidth: "40px" }}>
-            <div className={styles.bar}>fwdw</div>
-            <div>April <span className="fw-semibold">17</span></div>
-          </div>
-          <div className="d-flex flex-column flex-shrink-0" style={{ width: "40px", minWidth: "40px" }}>
-            <div className={styles.bar}>fwdw</div>
-            <div>April <span className="fw-semibold">18</span></div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
