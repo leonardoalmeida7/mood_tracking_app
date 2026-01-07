@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 import { TrendInfo } from "../TrendInfo";
 
 export const TrendsContainer = () => {
-  const { data, error, isLoading } = useFetchQuery<MoodApiResponse>("all", "fetchAll");
+  const { data} = useFetchQuery<MoodApiResponse>("all", "fetchAll");
  
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [hoveredEntry, setHoveredEntry] = useState<number | null>(null);
