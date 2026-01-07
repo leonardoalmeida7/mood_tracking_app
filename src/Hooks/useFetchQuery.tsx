@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useLogMood } from "../contexts/LogMoodContext";
 import { api } from "../services/api";
 
-export const useFetchQuery = (url: string, key: string) => {
+export const useFetchQuery = <T = any>(url: string, key: string) => {
   const token = localStorage.getItem("token");
   const { concluided, step } = useLogMood();
-  const { data, error, isLoading } = useQuery({
+  const { data, error, isLoading } = useQuery<T>({
     queryKey: [key],
     queryFn: async () => {
       const response = await api.get(`mood/${url}`, {

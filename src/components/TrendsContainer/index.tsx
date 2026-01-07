@@ -1,18 +1,18 @@
 import { useFetchQuery } from "../../Hooks/useFetchQuery";
+import { useEffect, useRef, useState } from "react";
 
 import iconSleep from "../../assets/images/icon-sleep.svg";
-import { useLogMood } from "../../contexts/LogMoodContext";
 import { moodInfo } from "../../assets/data/moodInfo";
+import type { MoodEntry, MoodApiResponse } from "../../types/mood";
 
 import styles from "./styles.module.css";
-
-// Exemplo de dados
-/* const quantities = [10, 8, 6, 4, 2, 0];
-const days = Array.from({ length: 7 }, (_, i) => i + 1); // Dias 1 a 7
-const data = [2, 4, 6, 8, 10, 6, 4]; // Quantidade por dia */
+import { TrendInfo } from "../TrendInfo";
 
 export const TrendsContainer = () => {
-  const { data, error, isLoading } = useFetchQuery("all", "fetchAll");
+  const { data, error, isLoading } = useFetchQuery<MoodApiResponse>("all", "fetchAll");
+ 
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [hoveredEntry, setHoveredEntry] = useState<number | null>(null);
 
   const getMoodValue = (mood: string) => {
     const moodEntry = moodInfo.find((m) => m.mood === mood);
@@ -33,14 +33,51 @@ export const TrendsContainer = () => {
       case "9+ hours":
         return 100;
       case "7-8 hours":
-        return 60;
+        return 75;
       case "5-6 hours":
-        return 40;
+        return 50;
       case "3-4 hours":
         return 30;
       default:
-        return 20;
+        return 15;
     }
+  };
+
+  // Generate last 14 days
+  const generateLast14Days = () => {
+    const days = [];
+    for (let i = 9; i >= 0; i--) {
+      const date = new Date();
+      date.setDate(date.getDate() - i);
+      date.setHours(0, 0, 0, 0);
+      days.push(date);
+    }
+    return days;
+  };
+
+  // Scroll to the right on mount
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+    }
+  }, [data]);
+
+  // Merge data with dates
+  const getMergedData = () => {
+    const last14Days = generateLast14Days();
+    
+    return last14Days.map(date => {
+      const dateStr = date.toISOString().split('T')[0];
+      const entry = data?.data.find((item: MoodEntry) => {
+        const itemDate = new Date(item.createdAt).toISOString().split('T')[0];
+        return itemDate === dateStr;
+      });
+      
+      return {
+        date: date.toISOString(),
+        entry: entry || null
+      };
+    });
   };
 
   return (
@@ -70,6 +107,7 @@ export const TrendsContainer = () => {
           </div>
         </div>
         <div
+          ref={scrollContainerRef}
           className={`${styles.tableContent} d-flex gap-3`}
           style={{
             overflowX: "auto",
@@ -77,31 +115,45 @@ export const TrendsContainer = () => {
             scrollBehavior: "smooth",
           }}
         >
-          {data?.data.map(({ id, mood, createdAt, sleepHours }) => (
+          {getMergedData().map(({ date, entry }, index) => (
             <div
               className="d-flex flex-column flex-shrink-0"
-              style={{ width: "35px", minWidth: "35px" }}
-              key={id}
+              style={{ width: "42px", minWidth: "42px" }}
+              key={`${date}-${index}`}
             >
-              <div
-                className={styles.bar}
-                style={{
-                  backgroundColor: `${getMoodValue(mood)?.color}`,
-                  height: `${convertSleepToNumber(sleepHours)}%`,
-                }}
-              >
-                <img
-                  src={getMoodValue(mood)?.icon}
-                  alt={getMoodValue(mood)?.alt}
+              {entry ? (
+                <div
+                  className={styles.bar}
+                  style={{
+                    backgroundColor: `${getMoodValue(entry.mood)?.color}`,
+                    height: `${convertSleepToNumber(entry.sleepHours)}%`,
+                  }}
+                >
+                  <img
+                    src={getMoodValue(entry.mood)?.iconWhite}
+                    alt={getMoodValue(entry.mood)?.alt}
+                    onMouseEnter={() => setHoveredEntry(index)}
+                    onMouseLeave={() => setHoveredEntry(null)}
+                  />
+                  {hoveredEntry === index && <TrendInfo data={entry} image={getMoodValue(entry.mood)?.icon} height={convertSleepToNumber(entry.sleepHours)} />}
+                </div>
+              ) : (
+                <div
+                  className={styles.bar}
+                  style={{
+                    backgroundColor: "transparent",
+                    height: "0%",
+                  }}
                 />
-              </div>
+              )}
               <div>
-                <span className="fw-semibold">{formatDate(createdAt)}</span>
+                <span className="fw-semibold">{formatDate(date)}</span>
               </div>
             </div>
           ))}
         </div>
       </div>
+      
     </div>
   );
 };

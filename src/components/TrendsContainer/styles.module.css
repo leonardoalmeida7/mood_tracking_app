@@ -2,19 +2,21 @@
   background-color: var(--neutral-0);
   border-radius: 1rem;
   border: 1px solid var(--neutral-200);
-  padding: 1rem;
+  padding: 1.5rem;
+  flex: 1 1 70%;
 }
 
 .tableHeaderLeft {
   text-align: left;
-  flex: 1 1 120px;
-  padding-bottom: 2rem;
+  flex: 1 1 160px;
+  padding-bottom: 4rem;
 }
 
 .tableHeaderLeft div {
   color: var(--neutral-600);
   font-weight: 400;
   font-size: 0.75rem;
+  margin: .75rem 0;
 }
 
 .tableHeaderLeft img {
@@ -33,21 +35,20 @@
 }
 
 .tableContent::-webkit-scrollbar {
-  height: 6px;
+  height: 4px;
+  cursor: pointer;
 }
 
 .tableContent::-webkit-scrollbar-track {
   background: var(--neutral-100);
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .tableContent::-webkit-scrollbar-thumb {
   background: var(--neutral-300);
   border-radius: 3px;
-}
-
-.tableContent::-webkit-scrollbar-thumb:hover {
-  background: var(--neutral-400);
+  cursor: pointer;
 }
 
 .tableContent > div {
@@ -55,15 +56,16 @@
 }
 
 .bar {
+  position: relative;
   border-radius: 2rem;
-  border: 1px solid var(--neutral-200);
   margin-bottom: 0.3rem;
   margin-top: auto;
 }
 
 .bar img {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
+  margin-top: 4px;
 }
 
 .tableContent div span {

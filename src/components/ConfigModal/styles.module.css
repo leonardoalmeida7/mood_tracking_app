@@ -1,0 +1,19 @@
+.configModal {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 90%;
+  z-index: 1000;
+}
+
+
+@media (min-width: 600px) {
+  .configModal {
+    max-width: 300px;
+    right: 100px;
+  }
+}

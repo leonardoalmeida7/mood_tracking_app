@@ -13,7 +13,7 @@ export const useFormSubmit = () => {
     nameField?: string;
   }>({});
 
-  const { login } = useContext(AuthContext);
+  const { login, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const formSubmit = async (
@@ -77,7 +77,7 @@ export const useFormSubmit = () => {
       ? `${(profileImage.size / 1024).toFixed(2)} KB`
       : "0 KB";
 
-    type ImageType = "image/png" | "image/jpeg" | undefined | null;
+    type ImageType = "image/png" | "image/jpeg" | "image/jpg" | undefined | null;
     const imageType: ImageType = profileImage?.type as ImageType;
 
     if (imageSize && parseFloat(imageSize) > 250) {
@@ -89,19 +89,27 @@ export const useFormSubmit = () => {
     if (
       imageType !== "image/png" &&
       imageType !== "image/jpeg" &&
+      imageType !== "image/jpg" &&
       imageType !== null &&
       imageType !== undefined
     ) {
-      toast.error("Invalid image format. Please upload a PNG or JPEG file.");
+      toast.error("Invalid image format. Please upload a PNG, JPEG, or JPG file.");
       return;
     }
 
     try {
-      const response = await api.post("user/register", {
-        name,
-        profileImage,
-        email,
-        password,
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('password', password);
+      if (profileImage) {
+        formData.append('profileImage', profileImage);
+      }
+
+      const response = await api.post("user/register", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
       toast.success(response.data.message);
       login(response.data.token, response.data.user);
@@ -114,5 +122,74 @@ export const useFormSubmit = () => {
     }
   };
 
-  return { formSubmit, formSubmitRegister, errorMessage, setErrorMessage };
+  const formSubmitUpdate = async (
+    event: React.FormEvent<HTMLFormElement>,
+    onSuccess?: () => void
+  ) => {
+    event.preventDefault();
+    if (name.length < 3) {
+      setErrorMessage({
+        nameField: "Name must be at least 3 characters long",
+      });
+      return;
+    }
+
+    setErrorMessage({});
+
+    const imageSize: string = profileImage
+      ? `${(profileImage.size / 1024).toFixed(2)} KB`
+      : "0 KB";
+
+    type ImageType = "image/png" | "image/jpeg" | "image/jpg" | undefined | null;
+    const imageType: ImageType = profileImage?.type as ImageType;
+
+    if (profileImage && parseFloat(imageSize) > 250) {
+      toast.error(
+        "Profile image size exceeds 250KB. Please choose a smaller image."
+      );
+      return;
+    }
+    if (
+      profileImage &&
+      imageType !== "image/png" &&
+      imageType !== "image/jpeg" &&
+      imageType !== "image/jpg" &&
+      imageType !== null &&
+      imageType !== undefined
+    ) {
+      toast.error("Invalid image format. Please upload a PNG, JPEG, or JPG file.");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append('name', name);
+      if (profileImage) {
+        formData.append('profileImage', profileImage);
+      }
+
+      const token = localStorage.getItem('token');
+      console.log("Token found:", !!token);
+      console.log("Sending update request...");
+      const response = await api.put("user/update", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
+      toast.success(response.data.message);
+      console.log("Updated user data:", response.data.user); // Debug log
+      updateUser(response.data.user);
+      if (onSuccess) onSuccess();
+    } catch (error: any) {
+      console.error("Error during profile update:", error);
+      toast.error(
+        error.response?.data?.message ||
+          "Profile update failed. Please try again."
+      );
+    }
+  };
+
+  return { formSubmit, formSubmitRegister, formSubmitUpdate, errorMessage, setErrorMessage };
 };

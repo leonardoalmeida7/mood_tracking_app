@@ -1,15 +1,18 @@
 import logo from "../../assets/images/logo.svg";
 import { OnBoardingContainer } from "../../components/OnBoardingContainer";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 export const OnBoardingPage = () => {
   return (
-    <div className={`${styles.container} d-flex flex-column justify-content-center align-items-center gap-4`}>
+    <div
+      className={`${styles.container} d-flex flex-column justify-content-center align-items-center gap-4`}
+    >
       <img src={logo} alt="Logo" />
-      <OnBoardingContainer />
+      <OnBoardingContainer
+        title="Personalize your experience"
+        description="Add your name and a profile picture to make Mood yours."
+      />
     </div>
-  )
-}
-
-
+  );
+};

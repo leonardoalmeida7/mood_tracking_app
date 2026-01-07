@@ -1,4 +1,6 @@
 import { useRegister } from "../../contexts/RegisterContext";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import { FormGroup } from "../FormGroup";
 import AvatarPlaceholder from "../../assets/images/avatar-placeholder.svg";
@@ -9,21 +11,43 @@ import { useFormSubmit } from "../../Hooks/useFormSubmit";
 
 import styles from "./styles.module.css";
 
-export const OnBoardingContainer = () => {
+interface OnBoardingContainerProps {
+  title: string;
+  description: string;
+  isUpdate?: boolean;
+  onSuccess?: () => void;
+}
+
+export const OnBoardingContainer = ({ title, description, isUpdate = false, onSuccess }: OnBoardingContainerProps) => {
   const { name, setName, profileImage, setProfileImage } =
     useRegister();
+  const { user } = useContext(AuthContext);
 
+  const { formSubmitRegister, formSubmitUpdate, errorMessage } = useFormSubmit();
 
-  const { formSubmitRegister, errorMessage } = useFormSubmit();
+  // Initialize form with current user data when in update mode
+  useEffect(() => {
+    if (isUpdate && user) {
+      setName(user.name || '');
+    }
+  }, [isUpdate, user, setName]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (isUpdate) {
+      formSubmitUpdate(e, onSuccess);
+    } else {
+      formSubmitRegister(e);
+    }
+  };
 
 
   return (
     <div className={styles.container}>
       <div>
-        <h1>Personalize your experience</h1>
-        <p>Add your name and a profile picture to make Mood yours.</p>
+        <h1>{title}</h1>
+        <p>{description}</p>
       </div>
-      <form onSubmit={(e) => formSubmitRegister(e)}>
+      <form onSubmit={handleSubmit}>
         <FormGroup
           labelText="Name"
           type="text"
@@ -39,7 +63,9 @@ export const OnBoardingContainer = () => {
             src={
               profileImage
                 ? URL.createObjectURL(profileImage)
-                : AvatarPlaceholder
+                : user?.profileImage 
+                  ? `http://localhost:5000${user.profileImage}`
+                  : AvatarPlaceholder
             }
             alt="Profile"
             className={`${styles.profileImage} align-self-start`}
@@ -61,7 +87,7 @@ export const OnBoardingContainer = () => {
             />
           </div>
         </div>
-        <DefaultButton type="submit">Start Tracking</DefaultButton>
+        <DefaultButton type="submit">{isUpdate ? 'Update Profile' : 'Start Tracking'}</DefaultButton>
       </form>
     </div>
   );

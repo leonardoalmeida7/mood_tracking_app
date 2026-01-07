@@ -1,3 +1,4 @@
+import { useFetchQuery } from "../../Hooks/useFetchQuery";
 import bgAverages from "../../assets/images/bg-pattern-averages.svg";
 
 import styles from "./styles.module.css";
@@ -7,8 +8,13 @@ type AverageContainerProps = {
 };
 
 export const AverageContainer = ({ latestMood }: AverageContainerProps) => {
+  const { data, error, isLoading } = useFetchQuery("all", "fetchAll");
+  const length = data ? data.data.length : 0;
+  if(length >= 5) {
+    const lastFiveMoods = data.data.slice(-5);
+  }
   return (
-    <div className={`${styles.container} my-4 d-flex flex-column gap-3`}>
+    <div className={`${styles.container} my-4 my-xl-0 d-flex flex-column gap-3`}>
       <div>
         <p className={styles.title}>
           Average Mood <span>(Last 5 Check-ins)</span>

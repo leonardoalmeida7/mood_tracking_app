@@ -19,8 +19,10 @@ export const HomePage = () => {
       <main className="my-4">
         <InitialPresentation latestMood={!!error} loading={isLoading} />
         {!!data && <DataSection lastData={data} />}
-        <AverageContainer latestMood={data} />
-        <TrendsContainer />
+        <section className="d-xl-flex gap-4">
+          <AverageContainer latestMood={data} />
+          <TrendsContainer />
+        </section>
       </main>
     </main>
   );
