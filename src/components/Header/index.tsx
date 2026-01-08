@@ -28,7 +28,7 @@ export const Header = () => {
     
     // Check if it's a URL path from the server
     if (user.profileImage.startsWith('/uploads/')) {
-      return `http://localhost:5000${user.profileImage}`;
+      return `http://moodtrackingapp-backend-production.up.railway.app/${user.profileImage}`;
     }
     
     // Legacy support: Check if it's base64 format
