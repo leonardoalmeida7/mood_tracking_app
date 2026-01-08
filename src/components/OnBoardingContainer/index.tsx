@@ -64,7 +64,7 @@ export const OnBoardingContainer = ({ title, description, isUpdate = false, onSu
               profileImage
                 ? URL.createObjectURL(profileImage)
                 : user?.profileImage 
-                  ? `http://moodtrackingapp-backend-production.up.railway.app/${user.profileImage}`
+                  ? `https://moodtrackingapp-backend-production.up.railway.app/${user.profileImage}`
                   : AvatarPlaceholder
             }
             alt="Profile"
