@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+# Frontend Mentor - Mood tracking app solution
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a solution to the [Mood tracking app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/mood-tracking-app-E2XeKhDF0B). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-Currently, two official plugins are available:
+## Table of contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [Continued development](#continued-development)
+- [Author](#author)
 
-## React Compiler
+## Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### The challenge
 
-## Expanding the ESLint configuration
+Users should be able to:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Log their mood, feelings, reflections, and sleep each day
+- See today's mood, feelings, reflection, and sleep, once logged
+- See a relevant mood quote based on today's mood (found in the `data.json` file)
+- See a graph showing the most recent eleven records to identify mood and sleep trends
+- Interact with each bar on the mood and sleep trends chart to see all information about that day
+- See their average mood and sleep from the past five check-ins and see how they compare with the previous five
+- Update their name or avatar through settings
+- View the optimal layout for the interface depending on their device's screen size
+- See hover and focus states for all interactive elements on the page
+- **Bonus**: Save details to a database (build the project as a full-stack app)
+- **Bonus**: Create an account and log in (add user authentication to the full-stack app)
+- **Bonus**: Integrate with a third-party image-hosting service for the avatar upload
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Screenshot
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+![project image](./preview.jpg)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Links
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Solution URL: [GitHub](https://github.com/leonardoalmeida7/mood_tracking_app)
+- Live Site URL: [Live Url Site](https://leonardoalmeida7.github.io/mood_tracking_app/)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## My process
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [React](https://reactjs.org/) - JS library
+- [Bootstrap](https://bootstrap.com/) - For styles
+- [Axios](https://axios-http.com/ptbr/docs/intro) - For request
+- [NodeJS](https://nodejs.org/en) - api creation
+- [Sequelize](https://sequelize.org/) - ORM for Database
+- [Express](https://expressjs.com/pt-br/) - to facilitate the creation of APIs
+- [MySQL](https://www.mysql.com/) - Database
+- [JWT](https://www.jwt.io/) - For Auth
+
+### Continued development
+
+I will continue optimizing the app and improving the "average sleep and mood" functionality.
+
+## Author
+
+- Website - [Leonardo](https://leonardoalmeida7.github.io/my_portfolio/)
+- Frontend Mentor - [@leonardoalmeida7](https://www.frontendmentor.io/profile/leonardoalmeida7)
+- GitHub - [leonardoalmeida7](https://github.com/leonardoalmeida7)
