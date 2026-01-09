@@ -1,9 +1,10 @@
 import { useRegister } from "../../contexts/RegisterContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 import { FormGroup } from "../FormGroup";
 import AvatarPlaceholder from "../../assets/images/avatar-placeholder.svg";
+import { getProfileImageUrl } from "../../utils/imageUtils";
 
 import { DefaultButton } from "../../ui/DefaultButton";
 
@@ -22,6 +23,7 @@ export const OnBoardingContainer = ({ title, description, isUpdate = false, onSu
   const { name, setName, profileImage, setProfileImage } =
     useRegister();
   const { user } = useContext(AuthContext);
+  const [imageError, setImageError] = useState(false);
 
   const { formSubmitRegister, formSubmitUpdate, errorMessage } = useFormSubmit();
 
@@ -31,6 +33,25 @@ export const OnBoardingContainer = ({ title, description, isUpdate = false, onSu
       setName(user.name || '');
     }
   }, [isUpdate, user, setName]);
+
+  const handleImageError = () => {
+    console.log('Image error loading:', user?.profileImage);
+    setImageError(true);
+  };
+
+  const getImageSrc = () => {
+    // If there's a new file selected, show preview
+    if (profileImage) {
+      return URL.createObjectURL(profileImage);
+    }
+    
+    // If there's an error loading, return placeholder
+    if (imageError) {
+      return AvatarPlaceholder;
+    }
+    
+    return getProfileImageUrl(user?.profileImage, AvatarPlaceholder);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (isUpdate) {
@@ -60,15 +81,10 @@ export const OnBoardingContainer = ({ title, description, isUpdate = false, onSu
         />
         <div className="d-flex  gap-3">
           <img
-            src={
-              profileImage
-                ? URL.createObjectURL(profileImage)
-                : user?.profileImage 
-                  ? `https://moodtrackingapp-backend-production.up.railway.app/${user.profileImage}`
-                  : AvatarPlaceholder
-            }
+            src={getImageSrc()}
             alt="Profile"
             className={`${styles.profileImage} align-self-start`}
+            onError={handleImageError}
           />
           <div className="">
             <p className="m-0">Upload Image</p>

@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import iconDropDownArrow from "../../assets/images/icon-dropdown-arrow.svg";
 import avatarPlaceholder from "../../assets/images/avatar-placeholder.svg";
 import { AuthContext } from "../../contexts/AuthContext";
+import { getProfileImageUrl } from "../../utils/imageUtils";
 
 import logo from "../../assets/images/logo.svg";
 import { ConfigModal } from "../ConfigModal";
@@ -22,21 +23,10 @@ export const Header = () => {
   };
 
   const getImageSrc = () => {
-    if (imageError || !user?.profileImage) {
+    if (imageError) {
       return avatarPlaceholder;
     }
-    
-    // Check if it's a URL path from the server
-    if (user.profileImage.startsWith('/uploads/')) {
-      return `https://moodtrackingapp-backend-production.up.railway.app/${user.profileImage}`;
-    }
-    
-    // Legacy support: Check if it's base64 format
-    const isValidBase64 = user.profileImage.startsWith('data:image/') && 
-                          user.profileImage.includes('base64,') &&
-                          user.profileImage.length > 50;
-    
-    return isValidBase64 ? user.profileImage : avatarPlaceholder;
+    return getProfileImageUrl(user?.profileImage, avatarPlaceholder);
   };
 
   return (

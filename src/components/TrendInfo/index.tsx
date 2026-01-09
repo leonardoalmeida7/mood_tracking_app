@@ -1,3 +1,4 @@
+import { parseFeelings } from '../../utils/parseFeelings';
 import styles from './styles.module.css';
 
 interface TrendInfoProps {
@@ -54,7 +55,7 @@ export const TrendInfo = ({ data, image, height }: TrendInfoProps) => {
       <div className='d-flex flex-column my-2'>
         <span className={styles.label}>Tags</span>
         <div>
-            {JSON.parse(data.feelings).join(', ')}
+            {parseFeelings(data.feelings).join(', ')}
         </div>
       </div>
     </div>

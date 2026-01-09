@@ -2,6 +2,7 @@ import { moodInfo, getRandomMoodQuote } from "../../assets/data/moodInfo";
 import IconSleep from "../../assets/images/icon-sleep.svg";
 import IconQuote from "../../assets/images/icon-quote.svg";
 import IconReflection from "../../assets/images/icon-reflection.svg";
+import { parseFeelings } from "../../utils/parseFeelings";
 
 import styles from "./styles.module.css";
 
@@ -56,7 +57,7 @@ export const DataSection = ({ lastData }: DataSectionProps) => {
           </div>
           <p className={styles.reflectionNotes}>{lastData.data.notes}</p>
           <div className={`${styles.feelingsContainer} d-flex flex-wrap gap-2`}>
-            {JSON.parse(lastData.data.feelings).map(
+            {parseFeelings(lastData.data.feelings).map(
               (feeling: string, index: number) => (
                 <span key={index} className={styles.feelingBadge}>
                   #{feeling}
